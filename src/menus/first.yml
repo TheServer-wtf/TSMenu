@@ -1,0 +1,55 @@
+TITLE: '&6My &dFirst &eMenu'
+PERMISSION: ''
+ROWS: 2
+ITEMS:
+  first:
+    name: '&cDisplay &ename'
+    material: ANVIL
+    amount: 3
+    lore:
+    - '&aThis &bis &ca lore'
+    - '&fYou can set this to'
+    - '&danything'
+    position: 8
+    enchants:
+    - sharpness
+  second:
+    name: '&bSecond item'
+    material: DIAMOND_SWORD
+    amount: 1
+    damage: 15
+    lore:
+    - '&aIf you click this'
+    - '&9It will run a command'
+    - '&das the player'
+    position: 10
+    enchants:
+    - fortune:2
+    function: command
+    commands:
+    - me Hello there
+  anything:
+    name: '&dI &chate &byou'
+    material: GOLDEN_HOE
+    amount: 1
+    damage: 36
+    lore:
+    - '&6If you click this'
+    - '&3It will run a command'
+    - '&5as the console'
+    position: 14
+    enchants:
+    - fortune:2
+    function: command
+    commands:
+    - 'CONSOLE$me %player% clicked the item'
+  menu:
+    name: '&fMenu opener'
+    material: ARROW
+    amount: 1
+    lore:
+    - '&fThis item opens'
+    - '&aa new menu!'
+    position: 0
+    function: menu
+    menu: second

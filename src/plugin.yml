@@ -1,0 +1,15 @@
+name: TSMenu
+version: '1.0.6'
+main: hu.Pdani.TSMenu.TSMenuPlugin
+authors: [Pdani001]
+api-version: '1.16'
+description: 'A menu plugin created for TheServer.wtf'
+website: 'www.pdani.hu'
+commands:
+  tsmenu:
+    description: TSMenu admin command
+    usage: '/<command> [args]'
+permissions:
+  tsmenu.admin:
+    default: op
+    description: 'Permission to use the ''/tsmenu'' command'

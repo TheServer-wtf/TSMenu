@@ -1,0 +1,17 @@
+TITLE: '&9The &fSecond &cMenu'
+PERMISSION: ''
+ROWS: 5
+ITEMS:
+  item:
+    name: '&a Go back !!!'
+    material: BARRIER
+    amount: 1
+    lore:
+    - '&aThis &bis &ca lore'
+    - '&fYou can set this to'
+    - '&danything'
+    position: 44
+    enchants:
+    - unbreaking:5
+    function: menu
+    menu: first
