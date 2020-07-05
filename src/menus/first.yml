@@ -1,5 +1,6 @@
 TITLE: '&6My &dFirst &eMenu'
 PERMISSION: ''
+COMMAND: 'firstmenu'
 ROWS: 2
 ITEMS:
   first:

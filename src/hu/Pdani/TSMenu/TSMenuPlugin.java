@@ -2,6 +2,7 @@ package hu.Pdani.TSMenu;
 
 import hu.Pdani.TSMenu.listener.CommandListener;
 import hu.Pdani.TSMenu.listener.InventoryListener;
+import hu.Pdani.TSMenu.listener.PlayerListener;
 import hu.Pdani.TSMenu.manager.FileManager;
 import hu.Pdani.TSMenu.manager.GuiManager;
 import org.bukkit.ChatColor;
@@ -27,6 +28,7 @@ public class TSMenuPlugin extends JavaPlugin {
         if(cmd != null)
             cmd.setExecutor(new CommandListener());
         getServer().getPluginManager().registerEvents(new InventoryListener(),this);
+        getServer().getPluginManager().registerEvents(new PlayerListener(),this);
         getLogger().info("The plugin is now enabled!");
     }
 
