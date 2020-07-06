@@ -5,6 +5,7 @@ import hu.Pdani.TSMenu.listener.CommandListener;
 import hu.Pdani.TSMenu.listener.InventoryListener;
 import hu.Pdani.TSMenu.manager.FileManager;
 import hu.Pdani.TSMenu.manager.GuiManager;
+import hu.Pdani.TSMenu.utils.Updater;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
@@ -27,6 +28,12 @@ public class TSMenuPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
+        Updater updater = new Updater("TheServer-wtf/TSMenu",plugin);
+        if(updater.check()){
+            getLogger().warning("There is a new version ("+updater.getLatest()+") available! Download it at https://github.com/"+updater.getRepo());
+        } else {
+            getLogger().info("You are running the latest version.");
+        }
         fm = new FileManager(this);
         fm.loadFiles();
         gm = new GuiManager(this);
