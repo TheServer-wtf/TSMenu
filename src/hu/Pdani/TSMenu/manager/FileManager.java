@@ -13,6 +13,7 @@ import java.util.List;
 public class FileManager {
     private HashMap<String, File> files = new HashMap<>();
     private HashMap<String, FileConfiguration> configs = new HashMap<>();
+    private HashMap<String,String> cmds = new HashMap<>();
     private TSMenuPlugin plugin;
     public FileManager(TSMenuPlugin plugin){
         this.plugin = plugin;
@@ -52,6 +53,17 @@ public class FileManager {
                 }
                 files.put(name,child);
                 configs.put(name, YamlConfiguration.loadConfiguration(child));
+                FileConfiguration sec = configs.get(name);
+                String mc = sec.getString("COMMAND",null);
+                if(mc != null && !mc.isEmpty()){
+                    if(cmds.containsKey(name) && !cmds.get(name).equalsIgnoreCase(mc)){
+                        cmds.remove(name);
+                    }
+                    cmds.put(name,mc);
+                    plugin.registerCommand(mc);
+                } else {
+                    cmds.remove(name);
+                }
             }
         }
         plugin.getLogger().info("Loaded "+files.size()+" menu files!");
@@ -79,6 +91,17 @@ public class FileManager {
         }
         files.put(obj,file);
         configs.put(obj, YamlConfiguration.loadConfiguration(file));
+        FileConfiguration sec = configs.get(name);
+        String mc = sec.getString("COMMAND",null);
+        if(mc != null && !mc.isEmpty()){
+            if(cmds.containsKey(name) && !cmds.get(name).equalsIgnoreCase(mc)){
+                cmds.remove(name);
+            }
+            cmds.put(name,mc);
+            plugin.registerCommand(mc);
+        } else {
+            cmds.remove(name);
+        }
     }
 
     public void unloadFile(String name) throws TSMException,IllegalArgumentException{
@@ -114,5 +137,30 @@ public class FileManager {
 
     public String[] getFileList(){
         return files.keySet().toArray(new String[0]);
+    }
+
+    public String getCommand(String file){
+        return cmds.get(file);
+    }
+
+    public String[] getCommandFiles(){
+        return cmds.keySet().toArray(new String[0]);
+    }
+
+    public boolean hasCommand(String file){
+        return cmds.containsKey(file);
+    }
+
+    public boolean isCommand(String cmd){
+        return cmds.containsValue(cmd);
+    }
+
+    public String getFileOnCommand(String cmd){
+        for(String k : cmds.keySet()){
+            if(cmds.get(k).equalsIgnoreCase(cmd)){
+                return k;
+            }
+        }
+        return null;
     }
 }
