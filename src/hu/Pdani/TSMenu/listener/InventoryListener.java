@@ -37,6 +37,7 @@ public class InventoryListener implements Listener {
                 return;
             NamespacedKey mke = new NamespacedKey(plugin, "menu");
             NamespacedKey cke = new NamespacedKey(plugin, "commands");
+            NamespacedKey close = new NamespacedKey(plugin, "close");
             ItemMeta meta = clicked.getItemMeta();
             if(meta == null)
                 return;
@@ -66,6 +67,8 @@ public class InventoryListener implements Listener {
             } else if(dc.has(mke, PersistentDataType.STRING)){
                 String menu = dc.get(mke, PersistentDataType.STRING);
                 plugin.getGm().openMenu(player,menu);
+            } else if(dc.has(close, PersistentDataType.INTEGER)){
+                player.closeInventory();
             }
         }
     }

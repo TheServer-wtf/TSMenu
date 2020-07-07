@@ -15,3 +15,12 @@ ITEMS:
     - unbreaking:5
     function: menu
     menu: first
+  tester:
+    name: '&c Close it ..'
+    material: APPLE
+    amount: 1
+    lore:
+      - '&cThis &7item'
+      - '&dcloses the menu.'
+    position: 5
+    function: close

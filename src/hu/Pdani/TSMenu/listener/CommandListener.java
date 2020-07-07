@@ -15,18 +15,20 @@ import static hu.Pdani.TSMenu.TSMenuPlugin.c;
 public class CommandListener implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if(!sender.hasPermission("tsmenu.admin"))
+        if(!sender.hasPermission("tsmenu.admin")) {
+            sendInfo(sender);
             return true;
-        String version = TSMenuPlugin.getPlugin().getDescription().getVersion();
-        List<String> authors = TSMenuPlugin.getPlugin().getDescription().getAuthors();
-        String longauthors = TSMenuPlugin.getPlugin().getDescription().getAuthors().stream().collect(Collectors.joining(", ", "", ""));
-        String description = TSMenuPlugin.getPlugin().getDescription().getDescription();
+        }
         if(args.length == 0 || (args[0].equalsIgnoreCase("help"))){
             sendHelp(sender);
             return true;
         }
         switch (args[0].toUpperCase()){
             case "ABOUT":
+                String version = TSMenuPlugin.getPlugin().getDescription().getVersion();
+                List<String> authors = TSMenuPlugin.getPlugin().getDescription().getAuthors();
+                String longauthors = authors.stream().collect(Collectors.joining(", ", "", ""));
+                String description = TSMenuPlugin.getPlugin().getDescription().getDescription();
                 sender.sendMessage(c("&6&lTSMenu plugin"));
                 sender.sendMessage(c("&a "+description));
                 sender.sendMessage(c("&eVersion: "+version));
@@ -126,9 +128,7 @@ public class CommandListener implements CommandExecutor {
     }
 
     private void sendHelp(CommandSender sender){
-        String version = TSMenuPlugin.getPlugin().getDescription().getVersion();
-        List<String> authors = TSMenuPlugin.getPlugin().getDescription().getAuthors();
-        sender.sendMessage(c("&eTSMenu plugin v"+version+", created by "+authors.get(0)));
+        sendInfo(sender);
         sender.sendMessage(c("&7- &9/tsmenu reloadall &7- &6Reload all files"));
         sender.sendMessage(c("&7- &9/tsmenu reload <file> &7- &6Reload the specified file"));
         sender.sendMessage(c("&7- &9/tsmenu load <file> &7- &6Load the specified file"));
@@ -137,5 +137,11 @@ public class CommandListener implements CommandExecutor {
         sender.sendMessage(c("&7- &9/tsmenu list [page] &7- &6List all the loaded files"));
         sender.sendMessage(c("&7- &9/tsmenu help &7- &6Display this list"));
         sender.sendMessage(c("&7- &9/tsmenu about &7- &6Information about the plugin"));
+    }
+
+    private void sendInfo(CommandSender sender){
+        String version = TSMenuPlugin.getPlugin().getDescription().getVersion();
+        List<String> authors = TSMenuPlugin.getPlugin().getDescription().getAuthors();
+        sender.sendMessage(c("&eTSMenu plugin v"+version+", created by "+authors.get(0)));
     }
 }

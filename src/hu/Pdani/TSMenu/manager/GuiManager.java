@@ -114,10 +114,15 @@ public class GuiManager {
                             meta.getPersistentDataContainer().set(mke, PersistentDataType.STRING, mn);
                             break;
                         case "command":
+                        case "commands":
                             NamespacedKey cke = new NamespacedKey(plugin, "commands");
                             meta.getPersistentDataContainer().set(cke, PersistentDataType.STRING, key);
                             mke = new NamespacedKey(plugin, "menu");
                             meta.getPersistentDataContainer().set(mke, PersistentDataType.STRING, menu);
+                            break;
+                        case "close":
+                            NamespacedKey close = new NamespacedKey(plugin, "close");
+                            meta.getPersistentDataContainer().set(close, PersistentDataType.INTEGER, 1);
                             break;
                         default:
                             break;
