@@ -38,6 +38,7 @@ public class InventoryListener implements Listener {
             NamespacedKey mke = new NamespacedKey(plugin, "menu");
             NamespacedKey cke = new NamespacedKey(plugin, "commands");
             NamespacedKey close = new NamespacedKey(plugin, "close");
+            NamespacedKey cmdata = new NamespacedKey(plugin, "cmdata");
             ItemMeta meta = clicked.getItemMeta();
             if(meta == null)
                 return;
@@ -69,6 +70,29 @@ public class InventoryListener implements Listener {
                 plugin.getGm().openMenu(player,menu);
             } else if(dc.has(close, PersistentDataType.INTEGER)){
                 player.closeInventory();
+            } else if(dc.has(cmdata,PersistentDataType.STRING)){
+                if(plugin.getTSItem() == null)
+                    return;
+                NamespacedKey tsitem = new NamespacedKey(plugin.getTSItem(), "tsitem");
+                NamespacedKey newdata = new NamespacedKey(plugin, "newdata");
+                if(!dc.has(newdata,PersistentDataType.INTEGER)) return;
+                Integer cmd = dc.get(newdata,PersistentDataType.INTEGER);
+                String check = dc.get(cmdata,PersistentDataType.STRING);
+                if(check == null || cmd == null) return;
+                Inventory inv = player.getInventory();
+                for(ItemStack i : inv.getContents()){
+                    if(i == null) continue;
+                    if(!i.hasItemMeta()) continue;
+                    ItemMeta im = i.getItemMeta();
+                    PersistentDataContainer ipdc = im.getPersistentDataContainer();
+                    if(!ipdc.has(tsitem,PersistentDataType.STRING)) continue;
+                    String tsiname = ipdc.get(tsitem,PersistentDataType.STRING);
+                    if(tsiname != null && tsiname.equalsIgnoreCase(check)){
+                        im.setCustomModelData(cmd);
+                        i.setItemMeta(im);
+                        player.closeInventory();
+                    }
+                }
             }
         }
     }

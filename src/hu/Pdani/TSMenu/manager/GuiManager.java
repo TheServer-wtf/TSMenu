@@ -67,7 +67,11 @@ public class GuiManager {
                 List<String> enchants = isec.getStringList("enchants");
                 int damage = isec.getInt("damage",0);
                 int cmd = isec.getInt("custommodeldata",-1);
+                int ndata = isec.getInt("newdata",0);
                 int pos = isec.getInt("position",-1);
+                String tsitem = isec.getString("tsitem","");
+                if(tsitem == null)
+                    tsitem = "";
                 Material material;
                 try{
                     material = Material.valueOf(smat.toUpperCase());
@@ -124,6 +128,11 @@ public class GuiManager {
                             NamespacedKey close = new NamespacedKey(plugin, "close");
                             meta.getPersistentDataContainer().set(close, PersistentDataType.INTEGER, 1);
                             break;
+                        case "cmdata":
+                            NamespacedKey cmdata = new NamespacedKey(plugin, "cmdata");
+                            NamespacedKey newdata = new NamespacedKey(plugin, "newdata");
+                            meta.getPersistentDataContainer().set(cmdata, PersistentDataType.STRING, tsitem);
+                            meta.getPersistentDataContainer().set(newdata, PersistentDataType.INTEGER, ndata);
                         default:
                             break;
                     }
