@@ -1,5 +1,5 @@
 name: TSMenu
-version: '1.3.0'
+version: '1.4.0'
 main: hu.Pdani.TSMenu.TSMenuPlugin
 authors: [Pdani001]
 api-version: '1.16'

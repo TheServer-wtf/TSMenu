@@ -108,13 +108,19 @@ public class GuiManager {
                     if(en != null)
                         meta.addEnchant(en,val,true);
                 }
+                NamespacedKey upd = new NamespacedKey(plugin, "update");
+                if(isec.isConfigurationSection("update")){
+                    meta.getPersistentDataContainer().set(upd, PersistentDataType.STRING, key);
+                    NamespacedKey mke = new NamespacedKey(plugin, "menu");
+                    meta.getPersistentDataContainer().set(mke, PersistentDataType.STRING, menu);
+                }
                 if(function != null && !function.isEmpty()){
                     switch (function.toLowerCase()){
                         case "menu":
                             String mn = isec.getString("menu");
                             if (mn == null)
                                 mn = "";
-                            NamespacedKey mke = new NamespacedKey(plugin, "menu");
+                            NamespacedKey mke = new NamespacedKey(plugin, "openmenu");
                             meta.getPersistentDataContainer().set(mke, PersistentDataType.STRING, mn);
                             break;
                         case "command":

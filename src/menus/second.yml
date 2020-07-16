@@ -24,3 +24,24 @@ ITEMS:
       - '&dcloses the menu.'
     position: 5
     function: close
+  updater:
+    name: '&7&lUpdater'
+    lore:
+      - '&9Click this to update a TSItem,'
+      - '&aand do a function at the same time'
+    material: BRICK
+    amount: 2
+    position: 23
+    function: command
+    commands:
+      - say hello
+    update:
+      select:
+        type: tsitem
+        name: cmd
+        limit: 0
+      lore:
+        - '&cUpdated'
+      name: '&eSomething else'
+      custommodeldata: 2
+      material: CLAY_BALL
